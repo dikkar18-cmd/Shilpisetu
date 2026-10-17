@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shilpi Setu | Indigenous Heritage Protocol</title>
+  <style>
+    :root {
+      /* Refined Luxury Palette */
+      --bg-deep: #0b2b26;        /* Forest Green */
+      --bg-cream: #FAF7F2;       /* Luxurious Cream */
+      --bg-card: #FFFFFF;        /* Pure White for contrast */
+      --gold-primary: #d4af37;   /* Muted Gold */
+      --gold-light: #e6c860;
+      --gold-muted: rgba(212, 175, 55, 0.12);
+      --text-light: #f8f9fa;
+      --text-dark: #163832;      /* Deep green text on cream */
+      --text-muted: #5a706b;
+      --danger: #d9534f;
+      --success: #3ab54a;
+      --border-subtle: rgba(22, 56, 50, 0.1);
+      --border-dark: rgba(212, 175, 55, 0.22);
+      --shadow-lg: 0 16px 40px rgba(11, 43, 38, 0.06);
+      --shadow-card: 0 8px 24px rgba(11, 43, 38, 0.04);
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-family: var(--font-sans); line-height: 1.6; }
+    body { background-color: var(--bg-cream); color: var(--text-dark); overflow-x: hidden; }
+    .container { width: 100%; max-width: 1240px; margin9: 0 auto; padding: 0 1.25rem; }
+
+    /* Navbar (Dark) */
+    .navbar { position: sticky; top: 0; z-index: 90; background: var(--bg-deep); border-bottom: 1px solid var(--border-dark); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+    .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--text-light); }
+    .logo-mark { width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg, var(--gold-primary), #9e7f1c); color: var(--bg-deep); font-weight: 800; font-size: 1.1rem; display: grid; place-items: center; }
+    .logo-text { display: flex; flex-direction: column; }
+    .brand-name { font-weight: 800; letter-spacing: 1.5px; font-size: 1.1rem; color: var(--text-light); }
+    .brand-sub { font-size: 0.72rem; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 0.8px; }
+    .nav-links { display: none; gap: 2rem; }
+    .nav-links a { color: #b0c4be; text-decoration: none; font-size: 0.92rem; font-weight: 600; transition: var(--transition-smooth); }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold-primary); }
+    
+    .status-pill { display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-dark); padding: 0.4rem 0.85rem; border-radius: 999px; font-size: 0.78rem; color: var(--text-light); }
+    .pulse-dot { width: 8px; height: 8px; background-color: var(--success); border-radius: 50%; box-shadow: 0 0 0 0 rgba(58, 181, 74, 0.7); animation: pulse 2s infinite; }
+    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(58, 181, 74, 0.7); } 70% { box-shadow: 0 0 0 8px rgba(58, 181, 74, 0); } 100% { box-shadow: 0 0 0 0 rgba(58, 181, 74, 0); } }
+
+    /* Hero Section (Dark) */
+    .hero { background-color: var(--bg-deep); color: var(--text-light); padding: 5rem 0 6rem; text-align: center; border-bottom: 1px solid var(--border-dark); background-image: radial-gradient(circle at 50% 100%, rgba(212, 175, 55, 0.08) 0%, transparent 50%); }
+    .hero-content { max-width: 860px; margin: 0 auto; }
+    .badge-header { display: inline-block; background: var(--gold-muted); color: var(--gold-primary); border: 1px solid var(--border-dark); padding: 0.35rem 1rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1.2px; margin-bottom: 1.5rem; }
+    .hero-title { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800; line-height: 1.15; margin-bottom: 1.25rem; letter-spacing: -0.5px; }
+    .gold-gradient { background: linear-gradient(90deg, var(--gold-primary), #fff2b2, var(--gold-primary)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-subtitle { font-size: clamp(1.05rem, 2vw, 1.2rem); color: #b0c4be; margin-bottom: 2.5rem; max-width: 760px; margin-left: auto; margin-right: auto; }
+    .hero-cta-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+    .btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1.75rem; border-radius: var(--radius-md); font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: var(--transition-smooth); cursor: pointer; border: none; }
+    .btn-primary { background: var(--gold-primary); color: var(--bg-deep); box-shadow: 0 8px 24px rgba(212, 175, 55, 0.25); }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-secondary { background: transparent; color: var(--text-light); border: 1px solid var(--border-dark); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: var(--gold-primary); }
+
+    /* Sections (Cream Background) */
+    .section { padding: 5.5rem 0; }
+    .section-header { text-align: center; max-width: 680px; margin: 0 auto 4rem; }
+    .eyebrow { color: var(--gold-primary); font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 0.75rem; }
+    .section-title { font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; color: var(--text-dark); }
+    .section-desc { color: var(--text-muted); font-size: 1.05rem; }
+
+    /* Scroll Reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Timeline on Cream */
+    .timeline-wrapper { position: relative; max-width: 840px; margin: 0 auto; padding-left: 2rem; }
+    .timeline-line { position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--gold-primary), rgba(212, 175, 55, 0.15)); }
+    .timeline-item { position: relative; margin-bottom: 2.5rem; }
+    .timeline-dot { position: absolute; left: -2rem; top: 1.5rem; width: 16px; height: 16px; border-radius: 50%; background: var(--bg-cream); border: 3px solid var(--gold-primary); box-shadow: 0 0 12px rgba(212, 175, 55, 0.4); }
+    .timeline-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-card); transition: var(--transition-smooth); }
+    .timeline-card:hover { border-color: var(--gold-primary); transform: translateX(6px); box-shadow: var(--shadow-lg); }
+    .timeline-era { display: inline-block; font-size: 0.78rem; font-weight: 800; color: var(--gold-primary); background: var(--gold-muted); padding: 0.35rem 0.85rem; border-radius: 6px; margin-bottom: 1rem; letter-spacing: 0.5px; }
+    .timeline-card h3 { font-size: 1.35rem; margin-bottom: 0.75rem; color: var(--text-dark); }
+    .timeline-card p { color: var(--text-muted); font-size: 1rem; margin-bottom: 1.25rem; }
+    .timeline-meta { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.85rem; color: var(--text-dark); border-top: 1px solid var(--border-subtle); padding-top: 1rem; font-weight: 600; }
+
+    /* Economic Benchmark */
+    .benchmark-section { background-color: #F5EFE6; border-top: 1px solid var(--border-subtle); border-bottom: 1px solid var(--border-subtle); }
+    .benchmark-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+    .benchmark-card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem; box-shadow: var(--shadow-card); }
+    .setu-card { border: 2px solid var(--gold-primary); box-shadow: 0 12px 32px rgba(212, 175, 55, 0.15); position: relative; overflow: hidden; }
+    .setu-card::after { content: ''; position: absolute; top: 0; right: 0; width: 120px; height: 120px; background: linear-gradient(135deg, transparent 50%, rgba(212, 175, 55, 0.1) 50%); }
+    .bm-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem; }
+    .bm-tag { font-size: 0.7rem; font-weight: 800; letter-spacing: 1.2px; padding: 0.35rem 0.75rem; border-radius: 6px; display: inline-block; margin-bottom: 0.75rem; }
+    .tag-danger { background: rgba(217, 83, 79, 0.1); color: var(--danger); }
+    .tag-gold { background: var(--gold-muted); color: var(--text-dark); border: 1px solid var(--gold-primary); }
+    .bm-header h3 { color: var(--text-dark); font-size: 1.2rem; }
+    .bm-percentage { font-size: 3rem; font-weight: 800; line-height: 1; }
+    .danger-text { color: var(--danger); }
+    .gold-text { color: var(--gold-primary); }
+    .bm-desc { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.75rem; }
+    .progress-track { width: 100%; height: 14px; background: #EAE3D5; border-radius: 999px; overflow: hidden; margin-bottom: 1rem; }
+    .progress-fill { height: 100%; border-radius: 999px; }
+    .fill-legacy { background: var(--danger); }
+    .fill-setu { background: linear-gradient(90deg, var(--gold-primary), var(--success)); }
+    .bm-breakdown { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-muted); }
+    .bm-breakdown strong { color: var(--text-dark); }
+
+    /* Footer (Dark) */
+    .footer { border-top: 1px solid var(--border-dark); padding: 3rem 0; background: var(--bg-deep); color: var(--text-light); }
+    .footer-inner { display: flex; flex-direction: column; gap: 1.5rem; justify-content: space-between; }
+    .footer-note { font-size: 0.9rem; color: #b0c4be; margin-top: 0.5rem; max-width: 500px; }
+    .footer-meta { display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.85rem; color: #b0c4be; }
+
+    @media (min-width: 768px) {
+      .nav-links { display: flex; }
+      .benchmark-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { flex-direction: row; align-items: center; }
+      .footer-meta { text-align: right; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">SS</span>
+        <div class="logo-text">
+          <span class="brand-name">SHILPI SETU</span>
+          <span class="brand-sub">Indigenous Protocol</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="active">History & Impact</a>
+        <a href="catalog.html">Craft Directory</a>
+      </nav>
+      <div class="status-pill">
+        <span class="pulse-dot"></span>
+        <span>Network: Active</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <div class="badge-header">ZERO-INTERMEDIARY ARCHITECTURE</div>
+        <h1 class="hero-title">Bridging Ancient Craftsmanship with Global Markets via <span class="gold-gradient">Shilpi Setu</span></h1>
+        <p class="hero-subtitle">
+          An enterprise digital protocol connecting verified Assamese craft clusters directly to urban buyers. Experience luxurious heritage while restoring 92% value retention to indigenous artisans.
+        </p>
+        <div class="hero-cta-group">
+          <a href="catalog.html" class="btn btn-primary">
+            <span>Enter Craft Directory</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#timeline" class="btn btn-secondary">Inspect Lineage</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline" class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">Chronological Provenance</span>
+          <h2 class="section-title">The Evolution of Assam's Guilds</h2>
+          <p class="section-desc">Tracing the lineage of metallurgical mastery and royal handloom patronage.</p>
+        </div>
+
+        <div class="timeline-wrapper">
+          <div class="timeline-line"></div>
+          <div class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-era">7th Century CE</span>
+              <h3>Ancient Alloy Casting & Metallurgy</h3>
+              <p>Historical gifts dispatched by Kamarupa monarchs document high-tin bronze and bell metal formulations—an exact copper-to-tin ratio forged without industrial molds.</p>
+              <div class="timeline-meta"><span>Ref: Archive #KM-07</span></div>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-era">16th – 17th Century CE</span>
+              <h3>Sarthebari Guilds & Sualkuchi Looms</h3>
+              <p>Formalization of specialized artisan guilds. Sarthebari emerged as the hub for hand-beaten bell metalware, while Sualkuchi standardized organic golden Muga weaving.</p>
+              <div class="timeline-meta"><span>Ref: Guild Registry #AH-16</span></div>
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-era">Present Day Protocol</span>
+              <h3>Eliminating the Value Drain</h3>
+              <p>Modern supply chains capture over 60% of retail value. <strong>Shilpi Setu</strong> establishes direct cryptographic bridges between verified Artisan Nodes and buyers.</p>
+              <div class="timeline-meta"><span>Ref: Direct Node Protocol v2.4</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="benchmark" class="section benchmark-section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">Economic Telemetry</span>
+          <h2 class="section-title">Fair-Trade Value Benchmark</h2>
+          <p class="section-desc">Analysis of net revenue retained by production nodes per ₹1,000 GMV.</p>
+        </div>
+        <div class="benchmark-grid reveal">
+          <div class="benchmark-card">
+            <div class="bm-header">
+              <div>
+                <span class="bm-tag tag-danger">LEGACY SUPPLY CHAIN</span>
+                <h3>Multi-Tier Broker Model</h3>
+              </div>
+              <span class="bm-percentage danger-text">32%</span>
+            </div>
+            <p class="bm-desc">Regional aggregators and urban retail markups absorb 68% of the final consumer price, isolating artisans.</p>
+            <div class="progress-track"><div class="progress-fill fill-legacy" style="width: 32%;"></div></div>
+            <div class="bm-breakdown">
+              <span>Node Share: <strong>32%</strong></span>
+              <span>Intermediaries: <strong>68%</strong></span>
+            </div>
+          </div>
+          <div class="benchmark-card setu-card">
+            <div class="bm-header">
+              <div>
+                <span class="bm-tag tag-gold">SHILPI SETU DIRECT</span>
+                <h3>Peer-to-Node Architecture</h3>
+              </div>
+              <span class="bm-percentage gold-text">92%</span>
+            </div>
+            <p class="bm-desc">Direct buyer-to-cluster settlement. Only 8% is allocated toward packaging and cluster quality auditing.</p>
+            <div class="progress-track"><div class="progress-fill fill-setu" style="width: 92%;"></div></div>
+            <div class="bm-breakdown">
+              <span>Node Share: <strong>92%</strong></span>
+              <span>Logistics/Audit: <strong>8%</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+    <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <span class="brand-name">SHILPI SETU</span>
+        <p class="footer-note">A student innovation project for the Samagra Shiksha district competition, designed to preserve indigenous heritage.</p>
+      </div>
+      <div class="footer-meta">
+        <span>Class 11 Science & Innovation Challenge</span>
+        <!-- This is the link to access the admin page -->
+        <a href="admin.html" style="color: var(--gold-primary); text-decoration: none; font-weight: 700; margin-top: 4px;">Admin / Node Access →</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    // Scroll Reveal Logic
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+  </script>
+</body>
+</html>
