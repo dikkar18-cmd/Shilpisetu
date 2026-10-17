@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Node Portal | Shilpi Setu</title>
+  <style>
+        /* Universal Floating Back Button */
+    .back-fab {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      background: var(--bg-deep);
+      color: var(--gold-primary);
+      border: 1px solid var(--gold-primary);
+      padding: 0.75rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 10px 28px rgba(11, 43, 38, 0.3);
+      z-index: 100;
+      transition: var(--transition-smooth, all 0.3s ease);
+    }
+    .back-fab:hover {
+      background: #113f38;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(11, 43, 38, 0.4);
+    }
+
+    :root {
+      --bg-deep: #0b2b26; --bg-cream: #FAF7F2; --bg-card: #FFFFFF;
+      --gold-primary: #d4af37; --text-light: #f8f9fa; --text-dark: #163832;
+      --border-subtle: rgba(22, 56, 50, 0.12); --radius-md: 12px;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: var(--font-sans); }
+    body { background-color: var(--bg-cream); color: var(--text-dark); }
+    
+    .navbar { background: var(--bg-deep); padding: 1rem; text-align: center; color: var(--gold-primary); font-weight: 800; letter-spacing: 2px; }
+    
+    .container { max-width: 600px; margin: 3rem auto; padding: 2rem; background: var(--bg-card); border-radius: var(--radius-md); box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border-subtle); }
+    .header-text { text-align: center; margin-bottom: 2rem; }
+    
+    .form-group { margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+    label { font-size: 0.85rem; font-weight: 700; color: var(--text-dark); text-transform: uppercase; }
+    input, select, textarea { width: 100%; padding: 0.85rem; border: 1px solid var(--border-subtle); border-radius: 8px; background: var(--bg-cream); outline: none; font-size: 0.95rem; }
+    input:focus, select:focus, textarea:focus { border-color: var(--gold-primary); }
+    
+    .file-upload { border: 2px dashed var(--gold-primary); padding: 2rem; text-align: center; border-radius: 8px; background: rgba(212, 175, 55, 0.05); cursor: pointer; }
+    .file-upload input { display: none; }
+    .file-upload-label { color: var(--gold-primary); font-weight: 700; cursor: pointer; }
+    
+    .btn-submit { width: 100%; background: var(--bg-deep); color: var(--gold-primary); padding: 1rem; border: none; border-radius: 8px; font-weight: 800; font-size: 1rem; cursor: pointer; margin-top: 1rem; transition: 0.3s; }
+    .btn-submit:hover { background: #113f38; }
+    
+    #previewImg { max-width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-top: 1rem; display: none; }
+    .nav-back { display: block; text-align: center; margin-top: 1.5rem; color: var(--text-dark); font-weight: 600; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">SHILPI SETU | NODE PORTAL</header>
+
+  <div class="container">
+    <div class="header-text">
+      <h2>Add New Inventory</h2>
+      <p style="color: #5a706b; font-size: 0.9rem;">Upload images and details directly to the catalog.</p>
+    </div>
+
+    <form id="inventoryForm">
+      <div class="form-group">
+        <label>Image Upload</label>
+        <div class="file-upload" onclick="document.getElementById('imageUpload').click()">
+          <span class="file-upload-label" id="fileText">Tap here to select a picture</span>
+          <input type="file" id="imageUpload" accept="image/*" required>
+        </div>
+        <img id="previewImg" alt="Image Preview">
+      </div>
+
+      <div class="form-group">
+        <label>Craft Category (Cluster)</label>
+        <select id="clusterCode" required>
+          <option value="AS-BM">Bell Metal & Brass</option>
+          <option value="AS-HL">Handloom & Silk</option>
+          <option value="AS-CB">Cane & Bamboo</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Product Title</label>
+        <input type="text" id="title" placeholder="e.g., Hand-Woven Muga Scarf" required>
+      </div>
+
+      <div class="form-group">
+        <label>Short Description</label>
+        <textarea id="description" rows="3" placeholder="Describe the item's heritage..." required></textarea>
+      </div>
+
+      <div style="display: flex; gap: 1rem;">
+        <div class="form-group" style="flex: 1;">
+          <label>Fair Price (₹)</label>
+          <input type="text" id="fairPrice" placeholder="e.g., 2500" required>
+        </div>
+        <div class="form-group" style="flex: 1;">
+          <label>Labor Hours</label>
+          <input type="text" id="laborHours" placeholder="e.g., 40 Hrs" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">Publish to Catalog</button>
+    </form>
+    <a href="catalog.html" class="nav-back">← Back to Catalog</a>
+  </div>
+
+  <script>
+    const imageUpload = document.getElementById('imageUpload');
+    const fileText = document.getElementById('fileText');
+    const previewImg = document.getElementById('previewImg');
+    let base64String = "";
+
+    // Convert uploaded image to Base64 to save in LocalStorage
+    imageUpload.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        fileText.textContent = file.name;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          base64String = e.target.result;
+          previewImg.src = base64String;
+          previewImg.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Handle form submit
+    document.getElementById('inventoryForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Create a random item code (e.g., #BM-892)
+      const prefix = document.getElementById('clusterCode').value.split('-')[1];
+      const randomCode = "#" + prefix + "-" + Math.floor(Math.random() * 900 + 100);
+
+      const newItem = {
+        itemCode: randomCode,
+        clusterCode: document.getElementById('clusterCode').value,
+        nodeId: "Verified Node (Local)",
+        clusterTitle: "Custom Artisan Upload",
+        title: document.getElementById('title').value,
+        imageUrl: base64String, // The uploaded picture
+        description: document.getElementById('description').value,
+        laborHours: document.getElementById('laborHours').value,
+        material: "Locally Sourced",
+        giStatus: "Pending Verification",
+        fairPrice: "₹" + document.getElementById('fairPrice').value,
+        artisanRetention: "92%"
+      };
+
+      // Get existing items from memory, add new one, save it back
+      let savedItems = JSON.parse(localStorage.getItem('shilpi_inventory') || '[]');
+      savedItems.unshift(newItem); // Add to the top of the list
+      localStorage.setItem('shilpi_inventory', JSON.stringify(savedItems));
+
+      alert("Item successfully added to the catalog!");
+      window.location.href = "catalog.html"; // Send user back to catalog
+    });
+  </script>
+    <!-- Floating Back Button (Admin to Catalog) -->
+  <a href="catalog.html" class="back-fab" aria-label="Go Back">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+    Back
+  </a>
+
+</body>
+</html>
